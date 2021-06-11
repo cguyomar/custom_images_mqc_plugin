@@ -26,7 +26,7 @@ def custom_images_mqc_plugin_execution_start():
     to use custom command line flags.
     """
 
-    log.info("Running custom_images plugin v{}".format(config.feelnc_mqc_plugin_version))
+    log.info("Running custom_images plugin v{}".format(config.custom_images_mqc_plugin_version))
 
     # Add to the main MultiQC config object.
     # User config files have already been loaded at this point
