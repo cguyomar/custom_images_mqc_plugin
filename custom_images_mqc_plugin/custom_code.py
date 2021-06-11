@@ -35,14 +35,6 @@ def custom_images_mqc_plugin_execution_start():
 
     config.ignore_images="false"
 
-    if 'feelnc/lnc_classes' not in config.sp:
-        config.update_dict( config.sp, { 'feelnc/lnc_classes': { 'fn': '*classes.txt' } } )
-    if 'feelnc/roc' not in config.sp:
-        config.update_dict( config.sp, { 'feelnc/roc': { 'fn': '*_TGROC2.png' } } )
-    if 'feelnc/classification_summary' not in config.sp:
-        config.update_dict( config.sp, { 'feelnc/classification_summary': { 'fn': 'feelnc_classification_summary.txt' } } )
-    if 'feelnc/filter_log' not in config.sp:
-        config.update_dict( config.sp, { 'feelnc/filter_log': { 'fn': '*feelncfilter.log' } } )
     if 'custom_images/images_tab' not in config.sp:
         config.update_dict( config.sp, { 'custom_images/images_tab': { 'fn': '*custom_images.tsv' } } )
     # # Some additional filename cleaning
