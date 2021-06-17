@@ -15,10 +15,8 @@ class MultiqcModule(BaseMultiqcModule):
         super(MultiqcModule, self).__init__(name='Custom images', anchor='custom_images')
 
         # Parse logs
-        for f in self.find_log_files("custom_images/images_tab"):
-            infile = open(f['fn'])
-
-            for line in infile:
+        for f in self.find_log_files("custom_images/images_tab", filehandles=True):
+            for line in f['f']:
                 line = line.split("\t")
                 if len(line) < 3:
                     log.warning("Ignoring badly formatted line : "+" ".join(line))
