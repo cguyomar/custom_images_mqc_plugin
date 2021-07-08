@@ -6,6 +6,7 @@ from copy import deepcopy
 from collections import OrderedDict
 import re
 import os
+import base64
 
 log = logging.getLogger('multiqc')
 
@@ -33,8 +34,6 @@ class MultiqcModule(BaseMultiqcModule):
                     else:
                         image_path = os.path.join(f["root"], image_file)
 
-                    log.info(image_path)
-
                     if os.path.isfile(image_path):
                         self.make_section(image_path,image_text,image_description)
                     else:
@@ -42,9 +41,17 @@ class MultiqcModule(BaseMultiqcModule):
 
     def make_section(self,image_path,image_text,image_description):
 
+        extension = os.path.splitext(image_path)[1]
+        print(extension)
+        assert (extension == ".png") | (extension == ".jpeg") | (extension == ".jpg")
+        image_in = open(image_path,"rb")
+        image_string = base64.b64encode(image_in.read()).decode("utf-8")
+        image_html = '<div class="mqc-custom-content-image"><img src="data:image/{};base64,{}" /></div>'.format(
+                            extension, image_string)
+
         self.add_section(
             name = image_text,
             description = image_description,
             anchor = "custom_images_1",
-            content = '<div class="mqc-custom-content-image"><img src="{}" /></div>'.format(image_path)
+            content = image_html
         )
